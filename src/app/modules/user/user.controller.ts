@@ -12,18 +12,40 @@ const createUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'User created successfully',
+      message: 'User created successfully!',
       data: result,
     });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
-    res.json({
+    res.status(500).json({
       success: false,
-      message: 'User not found',
+      message: err.message ?? 'Something went wrong!',
       error: {
-        code: err.statusCode,
+        code: err.code ?? 500,
         description: err.message ?? 'Could not create user!',
+      },
+    });
+  }
+};
+
+const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const result = await UserServices.getAllUsersFromDB();
+
+    res.status(200).json({
+      success: true,
+      message: 'Users fetched successfully!',
+      data: result,
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message ?? 'Something went wrong!',
+      error: {
+        code: err.code ?? 500,
+        description: err.message ?? 'Could not fetch users!',
       },
     });
   }
@@ -31,4 +53,5 @@ const createUser = async (req: Request, res: Response) => {
 
 export const UserControllers = {
   createUser,
+  getAllUsers,
 };
