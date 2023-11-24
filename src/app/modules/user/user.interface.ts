@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Model } from 'mongoose';
 
 export type TFullName = {
@@ -31,6 +32,9 @@ export type TUser = {
 };
 
 export interface UserModel extends Model<TUser> {
-  // eslint-disable-next-line no-unused-vars
-  isUserExists(id: string): Promise<TUser | null>;
+  isUserExists(
+    userId: number,
+    username: string,
+    email: string,
+  ): Promise<TUser | null>;
 }

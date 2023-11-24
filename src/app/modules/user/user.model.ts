@@ -82,8 +82,14 @@ const userSchema = new Schema<TUser, UserModel>({
   orders: [productSchema],
 });
 
-userSchema.statics.isUserExists = async function (id: string) {
-  const existingUser = await User.findOne({ id });
+userSchema.statics.isUserExists = async function (
+  userId: number,
+  username: string,
+  email: string,
+) {
+  const existingUser = await User.findOne({
+    $or: [{ userId }, { username }, { email }],
+  });
   return existingUser;
 };
 
