@@ -99,8 +99,8 @@ const userSchema = new Schema<TUser, UserModel>({
 
 userSchema.statics.isUserExists = async function (
   userId: number,
-  username: string,
-  email: string,
+  username?: string,
+  email?: string,
 ) {
   const existingUser = await User.findOne({
     $or: [{ userId }, { username }, { email }],
