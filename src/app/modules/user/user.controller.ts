@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { UserServices } from './user.service';
-import userValidationSchema from './user.validation';
+import userValidationSchema, {
+  productValidationSchema,
+} from './user.validation';
 
 const createUser = async (req: Request, res: Response) => {
   try {
@@ -133,10 +135,43 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
+const addOrder = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const { product: productData } = req.body;
+
+    const zodParsedData = productValidationSchema.parse(productData);
+
+    const updatedUser = await UserServices.addProductToOrderInDB(
+      Number(userId),
+      zodParsedData,
+    );
+
+    if (updatedUser) {
+      res.status(200).json({
+        success: true,
+        message: 'Order created successfully!',
+        data: null,
+      });
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    res.status(404).json({
+      success: false,
+      message: err.message ?? 'Something went wrong!',
+      error: {
+        code: err.code ?? 404,
+        description: err.message ?? 'Could not add product to order!',
+      },
+    });
+  }
+};
+
 export const UserControllers = {
   createUser,
   getAllUsers,
   getSingleUser,
   updateUser,
   deleteUser,
+  addOrder,
 };

@@ -1,4 +1,4 @@
-import { TUser } from './user.interface';
+import { TProduct, TUser } from './user.interface';
 import { User } from './user.model';
 
 const createUserIntoDB = async (userData: TUser) => {
@@ -49,7 +49,25 @@ const deleteUserFromDB = async (userId: number) => {
   if (result.deletedCount === 0) {
     throw new Error('Could not delete the user!');
   }
+
   return result;
+};
+
+const addProductToOrderInDB = async (userId: number, productData: TProduct) => {
+  const user = await User.findOne({ userId });
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  if (!user.orders) {
+    user.orders = [];
+  }
+
+  user.orders.push(productData);
+  await user.save();
+
+  return user;
 };
 
 export const UserServices = {
@@ -58,4 +76,5 @@ export const UserServices = {
   getSingleUserFromDB,
   updateUserInDB,
   deleteUserFromDB,
+  addProductToOrderInDB,
 };

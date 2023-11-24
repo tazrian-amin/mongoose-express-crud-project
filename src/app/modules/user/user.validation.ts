@@ -11,7 +11,7 @@ const addressValidationSchema = z.object({
   country: z.string().trim(),
 });
 
-const productValidationSchema = z.object({
+export const productValidationSchema = z.object({
   productName: z.string().trim(),
   price: z.number().nonnegative(),
   quantity: z.number().nonnegative(),
