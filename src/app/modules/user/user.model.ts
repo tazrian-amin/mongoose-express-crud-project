@@ -118,6 +118,16 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+userSchema.pre('findOneAndUpdate', async function (next) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user = this.getUpdate() as any;
+  user.password = await bcrypt.hash(
+    user.password,
+    Number(config.bcrypt_salt_rounds),
+  );
+  next();
+});
+
 userSchema.set('toJSON', {
   transform: function (doc, ret) {
     delete ret._id;
