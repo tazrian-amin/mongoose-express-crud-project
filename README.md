@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project allows one to do basic CRUD operation with the created API endpoints. And it uses Node.js, Express, TypeScript, MongoDB, Mongoose, Zod, etc. for its development. Modular architecture, schema validation, and error handling are some of the key features of this application. Moreover, it uses linting tools like ESLint and Prettier, dotenv to handle environment variables, and bcrypt to hash user password, which have taken the standard of this project to an industry level.
+This project allows one to do basic CRUD operations with the created API endpoints. It uses Node.js, Express, TypeScript, MongoDB, Mongoose, Zod, etc. for its development. Modular architecture, schema validation, and error handling are some of the key features of this application. Moreover, it uses linting tools like ESLint and Prettier, dotenv to handle environment variables, and bcrypt to hash user password, which have taken the standard of this project to an industry level.
 
 ## Project Link
 
@@ -10,11 +10,11 @@ This project allows one to do basic CRUD operation with the created API endpoint
 
 ## API Testing
 
-To test the API of this project, you can visit [Postman](https://www.postman.com/) and sign in or sign up. Then create a workspace and a blank collection. Then select add request from the collection menu and paste the project live link (https://mongoose-express-crud-project.vercel.app/) to the URL. You can choose the HTTP methods from the dropdown on the left. And you can click on the Body and then choose raw and select JSON to pass request body for POST/PUT requests. That's it, you're good to go!
+To test the API of this project, you can visit [Postman](https://www.postman.com/) and sign in or sign up. Then create a workspace and a blank collection. Then select add request from the collection menu and paste the project live link (https://mongoose-express-crud-project.vercel.app/) to the URL. You can choose the HTTP methods from the dropdown on the left. You can click on the Body and then choose raw and select JSON to pass the request body for POST/PUT requests. That's it, you're good to go!
 
 ## API Endpoints
 
-`**User Data**`
+**User Data**
 
 **Create a new user in Database**
 
@@ -82,7 +82,7 @@ Request Body:
 
 Endpoint: `DELETE` /api/users/:userId
 
-`**Order Data**`
+**Order Data**
 
 **Update orders data of an user in Database**
 
