@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { UserServices } from './user.service';
-import userValidationSchema, {
+import {
   productValidationSchema,
+  userValidationSchema,
 } from './user.validation';
 
 const createUser = async (req: Request, res: Response) => {

@@ -1,5 +1,6 @@
-import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
+import { Schema, model } from 'mongoose';
+import config from '../../config';
 import {
   TAddress,
   TFullName,
@@ -7,7 +8,6 @@ import {
   TUser,
   UserModel,
 } from './user.interface';
-import config from '../../config';
 
 const fullNameSchema = new Schema<TFullName>(
   {

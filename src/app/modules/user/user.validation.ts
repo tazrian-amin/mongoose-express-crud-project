@@ -17,7 +17,7 @@ export const productValidationSchema = z.object({
   quantity: z.number().nonnegative(),
 });
 
-const userValidationSchema = z.object({
+export const userValidationSchema = z.object({
   userId: z.number().int().positive(),
   username: z.string().trim(),
   password: z.string(),
@@ -29,5 +29,3 @@ const userValidationSchema = z.object({
   address: addressValidationSchema,
   orders: z.array(productValidationSchema).optional(),
 });
-
-export default userValidationSchema;

@@ -15,4 +15,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to Mongoose-Express CRUD project!');
 });
 
+app.all('*', (req: Request, res: Response) => {
+  res.status(400).json({
+    success: false,
+    message: "This route doesn't exist",
+  });
+});
+
 export default app;

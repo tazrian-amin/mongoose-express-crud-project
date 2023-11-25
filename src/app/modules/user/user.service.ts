@@ -95,7 +95,7 @@ const calculateOrderPriceInDB = async (userId: number) => {
     return accumulator + order.price * order.quantity;
   }, 0);
 
-  return totalPrice;
+  return { totalPrice };
 };
 
 export const UserServices = {
