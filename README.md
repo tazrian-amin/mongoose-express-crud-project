@@ -6,54 +6,19 @@ This project allows one to do basic CRUD operation with the created API endpoint
 
 ## Project Link
 
-[LIVE LINK]()
+[Project LIVE LINK]()
 
 ## API Testing
 
-To test the API of this project, you can visit [Postman](https://www.postman.com/) and sign in or sign up. Then create a workspace and a blank collection. Then select add request from the collection menu and paste the LIVE LINK () to the URL. You can choose the HTTP methods from the dropdown on the left. And you can click on the Body and then choose raw and select JSON to pass request body for POST/PUT requests. That's it, you're good to go!
+To test the API of this project, you can visit [Postman](https://www.postman.com/) and sign in or sign up. Then create a workspace and a blank collection. Then select add request from the collection menu and paste the project live link () to the URL. You can choose the HTTP methods from the dropdown on the left. And you can click on the Body and then choose raw and select JSON to pass request body for POST/PUT requests. That's it, you're good to go!
 
 ## API Endpoints
 
-**User Data**
+`**User Data**`
 
-- Create a new user in Database
+**Create a new user in Database**
 
-Endpoint: `POST` : /api/users
-
-Request Body:
-
-```json
-{
-  "userId": "number",
-  "username": "string",
-  "password": "string",
-  "fullName": {
-    "firstName": "string",
-    "lastName": "string"
-  },
-  "age": "number",
-  "email": "string",
-  "isActive": "boolean",
-  "hobbies": ["string", "string"],
-  "address": {
-    "street": "string",
-    "city": "string",
-    "country": "string"
-  }
-}
-```
-
-- Get users data from Database
-
-Endpoint: `GET` : /api/users
-
-- Get user data from Database
-
-Endpoint: `GET` : /api/users/:userId
-
-- Update user data in Database
-
-Endpoint: `PUT` : /api/users/:userId
+Endpoint: `POST` /api/users
 
 Request Body:
 
@@ -78,15 +43,50 @@ Request Body:
 }
 ```
 
-- Delete user data from Database
+**Get users data from Database**
 
-Endpoint: `DELETE` : /api/users/:userId
+Endpoint: `GET` /api/users
 
-**Order Data**
+**Get user data from Database**
 
-- Update orders data of an user in Database
+Endpoint: `GET` /api/users/:userId
 
-Endpoint: `PUT` : /api/users/:userId/orders
+**Update user data in Database**
+
+Endpoint: `PUT` /api/users/:userId
+
+Request Body:
+
+```json
+{
+  "userId": "number",
+  "username": "string",
+  "password": "string",
+  "fullName": {
+    "firstName": "string",
+    "lastName": "string"
+  },
+  "age": "number",
+  "email": "string",
+  "isActive": "boolean",
+  "hobbies": ["string", "string"],
+  "address": {
+    "street": "string",
+    "city": "string",
+    "country": "string"
+  }
+}
+```
+
+**Delete user data from Database**
+
+Endpoint: `DELETE` /api/users/:userId
+
+`**Order Data**`
+
+**Update orders data of an user in Database**
+
+Endpoint: `PUT` /api/users/:userId/orders
 
 Request Body:
 
@@ -98,10 +98,10 @@ Request Body:
 }
 ```
 
-- Get orders data of an user from Database
+**Get orders data of an user from Database**
 
-Endpoint: `GET` : /api/users/:userId/orders
+Endpoint: `GET` /api/users/:userId/orders
 
-- Get total price of the orders of an user from Database
+**Get total price of the orders of an user from Database**
 
-Endpoint: `GET` : /api/users/:userId/orders/total-price
+Endpoint: `GET` /api/users/:userId/orders/total-price
