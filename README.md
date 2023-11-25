@@ -6,11 +6,11 @@ This project allows one to do basic CRUD operation with the created API endpoint
 
 ## Project Link
 
-[Project LIVE LINK]()
+[Project LIVE LINK](https://mongoose-express-crud-project.vercel.app/)
 
 ## API Testing
 
-To test the API of this project, you can visit [Postman](https://www.postman.com/) and sign in or sign up. Then create a workspace and a blank collection. Then select add request from the collection menu and paste the project live link () to the URL. You can choose the HTTP methods from the dropdown on the left. And you can click on the Body and then choose raw and select JSON to pass request body for POST/PUT requests. That's it, you're good to go!
+To test the API of this project, you can visit [Postman](https://www.postman.com/) and sign in or sign up. Then create a workspace and a blank collection. Then select add request from the collection menu and paste the project live link (https://mongoose-express-crud-project.vercel.app/) to the URL. You can choose the HTTP methods from the dropdown on the left. And you can click on the Body and then choose raw and select JSON to pass request body for POST/PUT requests. That's it, you're good to go!
 
 ## API Endpoints
 
