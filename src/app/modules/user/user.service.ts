@@ -20,12 +20,13 @@ const getAllUsersFromDB = async () => {
 };
 
 const getSingleUserFromDB = async (userId: number) => {
-  if ((await User.isUserExists(userId)) === null) {
-    throw new Error('User not found!');
+  const user = await User.isUserExists(userId);
+
+  if (!user) {
+    throw new Error('User not found');
   }
 
-  const result = await User.findOne({ userId });
-  return result;
+  return user;
 };
 
 const updateUserInDB = async (userId: number, userData: TUser) => {
@@ -36,6 +37,7 @@ const updateUserInDB = async (userId: number, userData: TUser) => {
   const result = await User.findOneAndUpdate({ userId }, userData, {
     new: true,
   });
+
   return result;
 };
 
@@ -70,6 +72,32 @@ const addProductToOrderInDB = async (userId: number, productData: TProduct) => {
   return user;
 };
 
+const getUserOrdersFromDB = async (userId: number) => {
+  const user = await User.isUserExists(userId);
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  const { orders } = user;
+
+  return { orders };
+};
+
+const calculateOrderPriceInDB = async (userId: number) => {
+  const user = await User.isUserExists(userId);
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  const totalPrice = user.orders?.reduce((accumulator, order) => {
+    return accumulator + order.price * order.quantity;
+  }, 0);
+
+  return totalPrice;
+};
+
 export const UserServices = {
   createUserIntoDB,
   getAllUsersFromDB,
@@ -77,4 +105,6 @@ export const UserServices = {
   updateUserInDB,
   deleteUserFromDB,
   addProductToOrderInDB,
+  getUserOrdersFromDB,
+  calculateOrderPriceInDB,
 };

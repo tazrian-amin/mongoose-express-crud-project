@@ -167,6 +167,56 @@ const addOrder = async (req: Request, res: Response) => {
   }
 };
 
+const getUserOrders = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+
+    const result = await UserServices.getUserOrdersFromDB(Number(userId));
+
+    res.status(200).json({
+      success: true,
+      message: 'Order fetched successfully!',
+      data: result,
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    res.status(404).json({
+      success: false,
+      message: err.message ?? 'Something went wrong!',
+      error: {
+        code: err.code ?? 404,
+        description: err.message ?? 'Could not get user orders!',
+      },
+    });
+  }
+};
+
+const calculateOrderPrice = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+
+    const result = await UserServices.calculateOrderPriceInDB(Number(userId));
+
+    res.status(200).json({
+      success: true,
+      message: 'Total price calculated successfully!',
+      data: result,
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    res.status(404).json({
+      success: false,
+      message: err.message ?? 'Something went wrong!',
+      error: {
+        code: err.code ?? 404,
+        description: err.message ?? 'Could not calculate total price!',
+      },
+    });
+  }
+};
+
 export const UserControllers = {
   createUser,
   getAllUsers,
@@ -174,4 +224,6 @@ export const UserControllers = {
   updateUser,
   deleteUser,
   addOrder,
+  getUserOrders,
+  calculateOrderPrice,
 };
