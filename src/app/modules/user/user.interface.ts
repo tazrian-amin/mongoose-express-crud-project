@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Model } from 'mongoose';
+import { Document, Model } from 'mongoose';
 
 export type TFullName = {
   firstName: string;
@@ -36,5 +36,5 @@ export interface UserModel extends Model<TUser> {
     userId: number,
     username?: string,
     email?: string,
-  ): Promise<TUser | null>;
+  ): Promise<(Document & TUser) | null>;
 }

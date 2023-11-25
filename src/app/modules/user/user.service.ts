@@ -56,7 +56,7 @@ const deleteUserFromDB = async (userId: number) => {
 };
 
 const addProductToOrderInDB = async (userId: number, productData: TProduct) => {
-  const user = await User.findOne({ userId });
+  const user = await User.isUserExists(userId);
 
   if (!user) {
     throw new Error('User not found');
