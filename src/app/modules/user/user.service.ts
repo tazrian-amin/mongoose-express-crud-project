@@ -1,4 +1,4 @@
-import { TProduct, TUser } from './user.interface';
+import { TProduct, TUpdateUser, TUser } from './user.interface';
 import { User } from './user.model';
 
 const createUserIntoDB = async (userData: TUser) => {
@@ -29,7 +29,7 @@ const getSingleUserFromDB = async (userId: number) => {
   return user;
 };
 
-const updateUserInDB = async (userId: number, userData: TUser) => {
+const updateUserInDB = async (userId: number, userData: TUpdateUser) => {
   if ((await User.isUserExists(userId)) === null) {
     throw new Error('User not found!');
   }

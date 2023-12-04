@@ -1,15 +1,18 @@
 import { Request, Response } from 'express';
+import { ZodError } from 'zod';
+import { TUpdateUser, TUser } from './user.interface';
 import { UserServices } from './user.service';
 import {
+  createUserValidationSchema,
   productValidationSchema,
-  userValidationSchema,
+  updateUserValidationSchema,
 } from './user.validation';
 
 const createUser = async (req: Request, res: Response) => {
   try {
-    const { user: userData } = req.body;
+    const userData: TUser = req.body;
 
-    const zodParsedData = userValidationSchema.parse(userData);
+    const zodParsedData = createUserValidationSchema.parse(userData);
 
     const result = await UserServices.createUserIntoDB(zodParsedData);
 
@@ -21,14 +24,25 @@ const createUser = async (req: Request, res: Response) => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err.message ?? 'Something went wrong!',
-      error: {
-        code: err.code ?? 500,
-        description: err.message ?? 'Could not create user!',
-      },
-    });
+    if (err instanceof ZodError) {
+      res.status(500).json({
+        success: false,
+        message: err.issues[0].message,
+        error: {
+          code: err.issues[0].code,
+          description: `${err.issues[0].message}`,
+        },
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: err.message ?? 'Something went wrong!',
+        error: {
+          code: err.code ?? 500,
+          description: err.message ?? 'Could not create user!',
+        },
+      });
+    }
   }
 };
 
@@ -82,9 +96,9 @@ const getSingleUser = async (req: Request, res: Response) => {
 const updateUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const { user: userData } = req.body;
+    const userData: TUpdateUser = req.body;
 
-    const zodParsedData = userValidationSchema.parse(userData);
+    const zodParsedData = updateUserValidationSchema.parse(userData);
 
     const result = await UserServices.updateUserInDB(
       Number(userId),
@@ -99,14 +113,25 @@ const updateUser = async (req: Request, res: Response) => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
-    res.status(404).json({
-      success: false,
-      message: err.message ?? 'Something went wrong!',
-      error: {
-        code: err.code ?? 404,
-        description: err.message ?? 'Could not update user!',
-      },
-    });
+    if (err instanceof ZodError) {
+      res.status(500).json({
+        success: false,
+        message: err.issues[0].message,
+        error: {
+          code: err.issues[0].code,
+          description: `${err.issues[0].message}`,
+        },
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: err.message ?? 'Something went wrong!',
+        error: {
+          code: err.code ?? 500,
+          description: err.message ?? 'Could not create user!',
+        },
+      });
+    }
   }
 };
 

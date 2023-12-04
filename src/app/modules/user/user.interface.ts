@@ -31,6 +31,19 @@ export type TUser = {
   orders?: TProduct[];
 };
 
+export type TUpdateUser = {
+  userId?: number;
+  username?: string;
+  password?: string;
+  fullName?: TFullName;
+  age?: number;
+  email?: string;
+  isActive?: boolean;
+  hobbies?: string[];
+  address?: TAddress;
+  orders?: TProduct[];
+};
+
 export interface UserModel extends Model<TUser> {
   isUserExists(
     userId: number,
