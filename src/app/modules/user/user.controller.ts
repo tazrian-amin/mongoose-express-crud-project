@@ -164,7 +164,7 @@ const deleteUser = async (req: Request, res: Response) => {
 const addOrder = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const { product: productData } = req.body;
+    const productData = req.body;
 
     const zodParsedData = productValidationSchema.parse(productData);
 
